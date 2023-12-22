@@ -40,7 +40,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="backdrop-blur-sm bg-white/5  flex justify-between md:hidden">
+      <div className="backdrop-blur-sm bg-white/5   flex justify-between md:hidden">
         <div>
           <div className="block cursor-pointer  p-4 font-bold"></div>
         </div>

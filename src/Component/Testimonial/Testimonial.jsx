@@ -12,7 +12,10 @@ const Testimonial = () => {
       .then((data) => setCorousolData(data));
   }, []);
   return (
-    <div className="lg:mt-56 anime-two  bottom-0 mt-10 md:mt-20 bg-gradient-to-b from-white via-[#bbffff] to-white">
+    <div
+      id="test"
+      className="lg:mt-56 anime-two  bottom-0 mt-10 md:mt-20 bg-gradient-to-b from-white via-[#f7fdfd]  to-white"
+    >
       <div className="text-center md:mt-20 lg:mb-0 mt-10">
         <h1 className="text-white text-5xl font-bold h-one">
           USER TESTIMONIALS

@@ -1,13 +1,13 @@
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useContext } from "react";
-import './CreateNewTask.css'
+import useAxios from "./Dashboard/useAxios";
+import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
+import { data } from "autoprefixer";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 
-import useAxiosPublic from "../../../Provider/UseAxiosPublic";
-import { AuthContext } from "../../../Provider/Authporvider";
-const CreateNewTask = () => {
-  const { user } = useContext(AuthContext);
-  const axios = useAxiosPublic();
+const EditTask = () => {
+  const axios = useAxios();
+  const loadedTask = useLoaderData();
   const {
     register,
     reset,
@@ -21,45 +21,37 @@ const CreateNewTask = () => {
     const date = data.date;
     const description = data.description;
     const priority = data.priority;
-    const role = data.role;
     const taskData = {
       title,
       date,
       description,
       priority,
-      role,
-      userEmail: user?.email,
-      status: "to-do",
     };
-    axios
-      .post("/task", taskData)
-      .then((res) => {
-        toast.success("Task added successfully!");
-        console.log(res.data);
-        reset();
-      })
-      .catch((err) => {
-        toast.error(err.message);
-        console.log(err.message);
-      });
+      axios.put(`/task/${loadedTask._id}, taskData`).then((res) =>
+      {
+        console.log(res.data)
+      if (res.data?.modifiedCount > 0) {
+        toast.success("Updated successfully!");
+      }
+    });
   };
-
   return (
     <div className="z-10 w-full flex justify-center ">
-      <div className="form-container w-full lg:w-[650px]">
+      <div className="form-container w-full lg:w-[600px]">
         <h3 className="text-4xl font-bold text-gray-300 text-center">
-          Begin Your Next Task
+          Edit Your Next Task
         </h3>
         <form className="z-50" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text text-white">Title</span>
+              <span className="label-text">Title</span>
             </label>
             <input
               type="text"
               {...register("title", { required: true })}
               placeholder="Title"
-              className="input input-bordered text-black"
+              className="input input-bordered"
+              defaultValue={loadedTask?.title}
               required
             />
             {errors.title && (
@@ -69,12 +61,13 @@ const CreateNewTask = () => {
 
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text text-white">Deadline</span>
+              <span className="label-text">Deadline</span>
             </label>
             <input
               type="date"
               {...register("date", { required: true })}
-              className="input input-bordered text-black"
+              className="input input-bordered"
+              defaultValue={loadedTask?.date}
               required
             />
             {errors.date && (
@@ -83,13 +76,14 @@ const CreateNewTask = () => {
           </div>
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text text-white">Description</span>
+              <span className="label-text">Description</span>
             </label>
             <textarea
               type="text"
               {...register("description", { required: true })}
               placeholder="Description"
-              className="input input-bordered text-black textarea-md"
+              className="input input-bordered textarea-md"
+              defaultValue={loadedTask?.description}
               required
             />
             {errors.description && (
@@ -98,12 +92,12 @@ const CreateNewTask = () => {
           </div>
           <label className="form-control z-10 w-full">
             <div className="label">
-              <span className="label-text text-white">priority</span>
+              <span className="label-text">priority</span>
             </div>
             <select
               {...register("priority", { required: true })}
-              className="select select-bordered text-black"
-              defaultValue=""
+              className="select select-bordered"
+              defaultValue={loadedTask?.priority}
             >
               <option disabled>Pick one</option>
               <option value="high">High</option>
@@ -115,31 +109,13 @@ const CreateNewTask = () => {
           {errors.priority && (
             <span className="text-red-600">This field is required</span>
           )}
-          <label className="form-control z-10 w-full">
-            <div className="label">
-              <span className="label-text text-white">role</span>
-            </div>
-            <select
-              {...register("role", { required: true })}
-              className="select select-bordered text-black"
-              defaultValue=""
-            >
-              <option disabled>Pick one</option>
-              <option value="to-do">to-do</option>
-              <option value="ongoing">ongoing</option>
-              <option value="Completed">completed</option>
-            </select>
-          </label>
-          {errors.priority && (
-            <span className="text-red-600">This field is required</span>
-          )}
 
           <button type="submit" className="mt-5 z-10 task-btn w-full">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Create Task
+            Update Task
           </button>
         </form>
       </div>
@@ -147,4 +123,4 @@ const CreateNewTask = () => {
   );
 };
 
-export default CreateNewTask;
+export default EditTask;

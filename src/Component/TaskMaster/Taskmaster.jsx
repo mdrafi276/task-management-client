@@ -10,10 +10,15 @@ import { CgMoreO } from "react-icons/cg";
 
 const Taskmaster = () => {
     return (
-      <div className='mt-5 md:mt-16'>
-        <div className=''>
-          <div className=''><h2 className=' selection:bg-white h-one font-extrabold text-center md:text-4xl lg:text-5xl'>Pro Task Team: For Every <br /> Profassional</h2>
-          <h2 className='text-center'>What would you like to manage with TaskMaster Work OS?</h2>
+      <div id="proTask" className="mt-5 md:mt-16">
+        <div className="">
+          <div className="">
+            <h2 className=" selection:bg-white h-one font-extrabold text-center md:text-4xl lg:text-5xl">
+              Pro Task Team: For Every <br /> Profassional
+            </h2>
+            <h2 className="text-center">
+              What would you like to manage with TaskMaster Work OS?
+            </h2>
           </div>
         </div>
         <div className=" mt-2 md:mt-20 grid grid-cols-1 md:grid-cols-2 md:w-[85%] gap-4 mx-auto lg:grid-cols-4">

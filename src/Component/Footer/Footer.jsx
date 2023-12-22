@@ -1,12 +1,25 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
     return (
       <div>
-        <footer className=" flex flex-col  items-center justify-center  gap-8 h-[480px]  footer-center p-10 bg-gradient-to-b from-white via-[#57ffff] to-[#00DFC0] text-base-content rounded">
+        <footer className=" flex flex-col  items-center justify-center  gap-8 h-[480px]  footer-center p-10 bg-gradient-to-b from-white via-[#adffff] to-[#00dfdf] text-base-content rounded">
           <nav className="grid grid-flow-col gap-4">
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
+            <Link to="/dashboard/riview">
+              {" "}
+              <a className="link link-hover">Riview</a>
+            </Link>
+            <Link to="/contactUs">
+              <a className="link link-hover">Contact</a>
+            </Link>
+
+            <a href="#test" className="link link-hover">
+              Testimonial
+            </a>
+
+            <a href="#proTask" className="link link-hover">
+              ProTask
+            </a>
           </nav>
           <nav>
             <div className="grid grid-flow-col gap-4">
@@ -45,7 +58,7 @@ const Footer = () => {
               </a>
             </div>
           </nav>
-          <aside>         
+          <aside>
             <p>Copyright © 2023 - All right reserved by MD RAFI Ltd</p>
           </aside>
         </footer>

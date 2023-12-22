@@ -16,8 +16,19 @@ import DashboardHome from './Component/Dashboard/Sidebar/DashboardHome';
 import TaskMenagement from './Component/Dashboard/Sidebar/TaskMenagement';
 import CreateNewTask from './Component/Dashboard/AddTask/CreateNewTask';
 import { Toaster } from 'react-hot-toast';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import TaskLists from './Component/Dashboard/TaskList';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+const queryClient = new QueryClient();
+
 const router = createBrowserRouter([
-   
   {
     path: "/",
     element: <Leyout></Leyout>,
@@ -53,7 +64,7 @@ const router = createBrowserRouter([
           { path: "riview", element: <DashbordRiview /> },
           {
             path: "CreateTask",
-            element: <CreateNewTask />  ,
+            element: <CreateNewTask />,
           },
           {
             path: "dashboardUser",
@@ -61,7 +72,11 @@ const router = createBrowserRouter([
           },
           {
             path: "taskManagement",
-            element: <TaskMenagement/>,
+            element:<TaskMenagement /> ,
+          },
+          {
+            path: "taskList",
+            element: <TaskLists></TaskLists>,
           },
         ],
       },
@@ -70,9 +85,15 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Authporvider>
-      <Toaster />
-      <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <Authporvider>
+        <DndProvider backend={HTML5Backend}>
+         <Toaster />
+      <RouterProvider router={router} /> 
+        </DndProvider>
+      
     </Authporvider>
+    </QueryClientProvider>
+    
   </React.StrictMode>
 );

@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Complete Project Proposal",
+    "description": "Draft and finalize the project proposal for the upcoming client meeting."
+  },
+  {
+    "title": "Daily Standup Meeting",
+    "description": "Attend the daily standup meeting with the development team to discuss progress and challenges."
+  },
+  {
+    "title": "Research New Technologies",
+    "description": "Explore and research the latest technologies relevant to the project requirements."
+  },
+  {
+    "title": "Prepare Presentation Slides",
+    "description": "Create presentation slides for the team's upcoming sprint review meeting."
+  },
+  {
+    "title": "Code Review Session",
+    "description": "Conduct a code review session to ensure the quality and consistency of the codebase."
+  },
+  {
+    "title": "Client Feedback Implementation",
+    "description": "Implement client feedback and update the application accordingly."
+  },
+  {
+    "title": "Team Building Activity",
+    "description": "Organize a team-building activity to strengthen collaboration and teamwork."
+  },
+  {
+    "title": "Website Deployment",
+    "description": "Deploy the latest version of the website to the production server."
+  },
+  {
+    "title": "Bug Fixing Sprint",
+    "description": "Dedicate time to address and fix any reported bugs in the system."
+  },
+  {
+    "title": "Content Creation for Blog",
+    "description": "Write and edit content for the company blog to showcase recent achievements and updates."
+  }
+]
