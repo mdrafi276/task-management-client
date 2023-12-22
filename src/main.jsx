@@ -26,6 +26,7 @@ import {
 import TaskLists from './Component/Dashboard/TaskList';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import EditTask from './Component/Dashboard/AddTask/UpdateTask';
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -64,19 +65,45 @@ const router = createBrowserRouter([
           { path: "riview", element: <DashbordRiview /> },
           {
             path: "CreateTask",
-            element: <CreateNewTask />,
+            element: (
+              <PrivetRoute>
+                <CreateNewTask />
+              </PrivetRoute>
+            ),
           },
           {
             path: "dashboardUser",
-            element: <DashboardHome />,
+            element: (
+              <PrivetRoute>
+                <DashboardHome />
+              </PrivetRoute>
+            ),
           },
           {
             path: "taskManagement",
-            element:<TaskMenagement /> ,
+            element: (
+              <PrivetRoute>
+                <TaskMenagement />
+              </PrivetRoute>
+            ),
           },
           {
             path: "taskList",
-            element: <TaskLists></TaskLists>,
+            element: (
+              <PrivetRoute>
+                <TaskLists></TaskLists>
+              </PrivetRoute>
+            ),
+          },
+          {
+            path: "editTask/:id",
+            element: (
+              <PrivetRoute>
+                <EditTask />
+              </PrivetRoute>
+            ),
+            loader: ({ params }) =>
+              fetch(`http://localhost:5000/tasks/${params.id}`),
           },
         ],
       },

@@ -1,13 +1,12 @@
 import toast from "react-hot-toast";
-import useAxios from "./Dashboard/useAxios";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router-dom";
-import { data } from "autoprefixer";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const EditTask = () => {
-  const axios = useAxios();
+  
   const loadedTask = useLoaderData();
+  console.log(loadedTask);
   const {
     register,
     reset,
@@ -21,13 +20,15 @@ const EditTask = () => {
     const date = data.date;
     const description = data.description;
     const priority = data.priority;
+    const role = data.role;
     const taskData = {
       title,
       date,
       description,
+      role,
       priority,
     };
-      axios.put(`/task/${loadedTask._id}, taskData`).then((res) =>
+      axios.put(`/tasks/${loadedTask._id}, taskData`).then((res) =>
       {
         console.log(res.data)
       if (res.data?.modifiedCount > 0) {
@@ -44,13 +45,13 @@ const EditTask = () => {
         <form className="z-50" onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text">Title</span>
+              <span className="label-text text-white">Title</span>
             </label>
             <input
               type="text"
               {...register("title", { required: true })}
               placeholder="Title"
-              className="input input-bordered"
+              className="input input-bordered text-black "
               defaultValue={loadedTask?.title}
               required
             />
@@ -61,12 +62,12 @@ const EditTask = () => {
 
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text">Deadline</span>
+              <span className="label-text text-white ">Deadline</span>
             </label>
             <input
               type="date"
               {...register("date", { required: true })}
-              className="input input-bordered"
+              className="input input-bordered text-black "
               defaultValue={loadedTask?.date}
               required
             />
@@ -76,13 +77,13 @@ const EditTask = () => {
           </div>
           <div className="form-control z-10">
             <label className="label">
-              <span className="label-text">Description</span>
+              <span className="label-text text-white">Description</span>
             </label>
             <textarea
               type="text"
               {...register("description", { required: true })}
               placeholder="Description"
-              className="input input-bordered textarea-md"
+              className="input input-bordered text-black  textarea-md"
               defaultValue={loadedTask?.description}
               required
             />
@@ -92,11 +93,11 @@ const EditTask = () => {
           </div>
           <label className="form-control z-10 w-full">
             <div className="label">
-              <span className="label-text">priority</span>
+              <span className="label-text text-white">priority</span>
             </div>
             <select
               {...register("priority", { required: true })}
-              className="select select-bordered"
+              className="select select-bordered text-black"
               defaultValue={loadedTask?.priority}
             >
               <option disabled>Pick one</option>
@@ -104,6 +105,24 @@ const EditTask = () => {
               <option value="moderate">Moderate</option>
               <option value="low">Low</option>
               <option value="optional">Optional</option>
+            </select>
+          </label>
+          {errors.priority && (
+            <span className="text-red-600">This field is required</span>
+          )}
+          <label className="form-control z-10 w-full">
+            <div className="label">
+              <span className="label-text text-white">role</span>
+            </div>
+            <select
+              {...register("role", { required: true })}
+              className="select select-bordered text-black"
+              defaultValue=""
+            >
+              <option disabled>Pick one</option>
+              <option value="to-do">to-do</option>
+              <option value="ongoing">ongoing</option>
+              <option value="Completed">completed</option>
             </select>
           </label>
           {errors.priority && (

@@ -52,11 +52,11 @@ import { useContext } from "react";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { BiSolidTimeFive } from "react-icons/bi";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Provider/UseAxiosPublic";
 import { AuthContext } from "../../../Provider/Authporvider";
+import axios from "axios";
 const TaskMenagement = () => {
   const { user, loding } = useContext(AuthContext);
-  const axios = useAxiosPublic();
+ 
   const {
     data: tasks = [],
     isLoading,
@@ -65,7 +65,9 @@ const TaskMenagement = () => {
     enabled: !loding,
     queryKey: ["allTasks"],
     queryFn: async () => {
-      const res = await axios.get(`/task/${user?.email}`);
+      const res = await axios.get(
+        `http://localhost:5000/task/${user?.email}`
+      );
       return res.data;
     },
   });
@@ -87,15 +89,17 @@ const TaskMenagement = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`/task/${id}`).then((res) => {
-          console.log(res.data);
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your task has been deleted.",
-            icon: "success",
+        axios
+          .delete(`http://localhost:5000/task/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your task has been deleted.",
+              icon: "success",
+            });
+            refetch();
           });
-          refetch();
-        });
       }
     });
   };
@@ -105,7 +109,7 @@ const TaskMenagement = () => {
         <h1 className="text-2xl  text-gray-300 font-bold uppercase">Tasks</h1>
         <Link to="/dashboard/CreateTask">
           <button className="flex items-center text-white gap-3 bg-blue-800 px-5 py-3 rounded-2xl outline-none font-semibold">
-       Create Tasks
+            Create Tasks
             <FaPlus />
           </button>
         </Link>
