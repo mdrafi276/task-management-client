@@ -28,13 +28,16 @@ const EditTask = () => {
       role,
       priority,
     };
-      axios.put(`/tasks/${loadedTask._id}, taskData`).then((res) =>
-      {
-        console.log(res.data)
-      if (res.data?.modifiedCount > 0) {
-        toast.success("Updated successfully!");
-      }
-    });
+      axios
+        .put(
+          `https://task-management-server-inky-two.vercel.app/tasks/${loadedTask._id}, taskData`
+        )
+        .then((res) => {
+          console.log(res.data);
+          if (res.data?.modifiedCount > 0) {
+            toast.success("Updated successfully!");
+          }
+        });
   };
   return (
     <div className="z-10 w-full flex justify-center ">

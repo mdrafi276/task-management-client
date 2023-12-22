@@ -7,7 +7,7 @@ const Testimonial = () => {
   const [corosoulData, setCorousolData] = useState();
   console.log(corosoulData);
   useEffect(() => {
-    fetch("http://localhost:5000/riview")
+    fetch("https://task-management-server-inky-two.vercel.app/riview")
       .then((res) => res.json())
       .then((data) => setCorousolData(data));
   }, []);

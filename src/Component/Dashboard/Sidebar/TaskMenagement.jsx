@@ -56,7 +56,7 @@ import { AuthContext } from "../../../Provider/Authporvider";
 import axios from "axios";
 const TaskMenagement = () => {
   const { user, loding } = useContext(AuthContext);
- 
+
   const {
     data: tasks = [],
     isLoading,
@@ -66,7 +66,7 @@ const TaskMenagement = () => {
     queryKey: ["allTasks"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/task/${user?.email}`
+        `https://task-management-server-inky-two.vercel.app/task/${user?.email}`
       );
       return res.data;
     },
@@ -90,7 +90,9 @@ const TaskMenagement = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/task/${id}`)
+          .delete(
+            `https://task-management-server-inky-two.vercel.app/task/${id}`
+          )
           .then((res) => {
             console.log(res.data);
             Swal.fire({

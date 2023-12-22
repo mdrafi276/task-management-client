@@ -1,21 +1,21 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Leyout from './Leyout/Leyout';
-import Home from './Page/Home';
-import Login from './Page/Login/Login';
-import Register from './Page/Register/Register';
-import { Authporvider } from './Provider/Authporvider';
-import Profile from './Page/Profile/Profile';
-import Dashboard from './Component/Dashboard/Dashboard';
-import ContactUs from './Component/ContactUs/ContactUs';
-import DashbordRiview from './Component/Dashboard/DashboardRiview';
-import PrivetRoute from './Provider/PrivetRoute';
-import DashboardHome from './Component/Dashboard/Sidebar/DashboardHome';
-import TaskMenagement from './Component/Dashboard/Sidebar/TaskMenagement';
-import CreateNewTask from './Component/Dashboard/AddTask/CreateNewTask';
-import { Toaster } from 'react-hot-toast';
+import Leyout from "./Leyout/Leyout";
+import Home from "./Page/Home";
+import Login from "./Page/Login/Login";
+import Register from "./Page/Register/Register";
+import { Authporvider } from "./Provider/Authporvider";
+import Profile from "./Page/Profile/Profile";
+import Dashboard from "./Component/Dashboard/Dashboard";
+import ContactUs from "./Component/ContactUs/ContactUs";
+import DashbordRiview from "./Component/Dashboard/DashboardRiview";
+import PrivetRoute from "./Provider/PrivetRoute";
+import DashboardHome from "./Component/Dashboard/Sidebar/DashboardHome";
+import TaskMenagement from "./Component/Dashboard/Sidebar/TaskMenagement";
+import CreateNewTask from "./Component/Dashboard/AddTask/CreateNewTask";
+import { Toaster } from "react-hot-toast";
 import {
   useQuery,
   useMutation,
@@ -23,10 +23,10 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import TaskLists from './Component/Dashboard/TaskList';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import EditTask from './Component/Dashboard/AddTask/UpdateTask';
+import TaskLists from "./Component/Dashboard/TaskList";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import EditTask from "./Component/Dashboard/AddTask/UpdateTask";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -103,7 +103,9 @@ const router = createBrowserRouter([
               </PrivetRoute>
             ),
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/tasks/${params.id}`),
+              fetch(
+                `https://task-management-server-inky-two.vercel.app/tasks/${params.id}`
+              ),
           },
         ],
       },
@@ -115,12 +117,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <Authporvider>
         <DndProvider backend={HTML5Backend}>
-         <Toaster />
-      <RouterProvider router={router} /> 
+          <Toaster />
+          <RouterProvider router={router} />
         </DndProvider>
-      
-    </Authporvider>
+      </Authporvider>
     </QueryClientProvider>
-    
   </React.StrictMode>
 );
